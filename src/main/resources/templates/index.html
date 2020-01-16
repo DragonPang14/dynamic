@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/zico.min.css">
+    <script src="/js/jquery-3.3.1.min.js" type="application/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body>
+    hello
+    <input type="text" name="vlist" id="vlist" placeholder="商品价值，使用','分开">
+    <input type="text" name="wlist" id="wlist" placeholder="商品重量，使用','分开">
+    <input type="text" name="cap" id="cap" placeholder="背包容量">
+    <button type="button" id="calculat" onclick="cal()">计算</button>
+</body>
+<script type="application/javascript">
+    function cal() {
+        var vlist = $("#vlist").val();
+        var wlist = $("#wlist").val();
+        var cap = $("#cap").val();
+        console.info(vlist + wlist + cap);
+        $.ajax({
+            url:"/knapSack",
+            type: "post",
+            dataType: "json",
+            contentType:"application/json",
+            data: JSON.stringify({"vlist": vlist, "wlist": wlist, "cap": cap}),
+            success: function (data) {
+                console.info(data);
+            }
+        })
+    }
+</script>
+</html>
